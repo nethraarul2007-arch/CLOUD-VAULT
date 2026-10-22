@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CloudVault: Secure File Storage and Version Recovery</title>
+  <link rel="stylesheet" href="./CloudVault_ Secure File Storage and Version Recovery 2_files/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" rx="9" fill="currentColor"></rect>
+        <circle cx="20" cy="20" r="9" fill="none" stroke="#ECEFEF" stroke-width="2.5"></circle>
+        <circle cx="20" cy="20" r="2.6" fill="#ECEFEF"></circle>
+        <path d="M20 11v4M20 25v4M11 20h4M25 20h4" stroke="#ECEFEF" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+      <div>
+        <h1>CloudVault</h1>
+        <p>Secure file storage with a full version history</p>
+      </div>
+    </div>
+    <dl class="totals" aria-label="Storage totals">
+      <div><dt>Files</dt><dd id="totalFiles">1</dd></div>
+      <div><dt>Versions kept</dt><dd id="totalVersions">3</dd></div>
+      <div><dt>Space used</dt><dd id="totalBytes">276 B</dd></div>
+    </dl>
+  </header>
+
+  <main class="layout">
+    <section class="library" aria-labelledby="libraryTitle">
+      <label class="dropzone" id="dropzone" for="fileInput">
+        <input id="fileInput" type="file" multiple="">
+        <span class="dz-title">Drop files here, or choose files</span>
+        <span class="dz-hint" id="dzHint">Uploading a name that already exists adds a new version.</span>
+        <span class="progress" id="progress" hidden=""><span class="progress-bar" id="progressBar" style="width: 100%;"></span></span>
+      </label>
+
+      <div class="note-row">
+        <label for="noteInput">Version note</label>
+        <input id="noteInput" type="text" maxlength="200" placeholder="What changed? (optional)">
+      </div>
+
+      <div class="list-head">
+        <h2 id="libraryTitle">Your files</h2>
+        <input id="filter" type="search" placeholder="Filter by name" aria-label="Filter files by name">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">Version</th><th scope="col">Size</th><th scope="col">Updated</th><th scope="col"><span class="sr-only">Actions</span></th></tr>
+          </thead>
+          <tbody id="fileRows"><tr class="file-row selected"><td><button type="button" class="file-name link-btn" aria-pressed="true">SAMPLE.txt</button></td><td><span class="vbadge">v3</span></td><td class="muted">82 B</td><td class="muted">22 Oct 2026, 3:41 pm</td><td><div class="actions"><a class="btn" href="http://localhost:3000/api/files/SAMPLE.txt">Download</a><button type="button" class="btn">History</button></div></td></tr></tbody>
+        </table>
+        <p class="empty" id="emptyState" hidden="">No files match that filter.</p>
+      </div>
+    </section>
+
+    <aside class="history" id="historyPanel" aria-labelledby="historyTitle">
+      <h2 id="historyTitle">Version history</h2>
+      <p class="history-empty" id="historyEmpty" hidden="">Select a file to see every version and restore an earlier one.</p>
+      <div id="historyBody">
+        <p class="history-file" id="historyFile">SAMPLE.txt · 3 versions kept</p>
+        <ol class="timeline" id="timeline"><li class="tl-item current"><div class="tl-head"><span class="tl-version">Version 3</span><span class="tl-tag">Current</span></div><div class="tl-meta">22 Oct 2026, 3:41 pm · 82 B</div><p class="tl-note">Restored from v1</p><div class="tl-hash">SHA-256 7ccd6d5f7368…</div><div class="tl-actions"><a class="btn" href="http://localhost:3000/api/files/SAMPLE.txt?version=3">Download</a></div></li><li class="tl-item"><div class="tl-head"><span class="tl-version">Version 2</span></div><div class="tl-meta">22 Oct 2026, 3:40 pm · 112 B</div><p class="tl-note">Gamsamida</p><div class="tl-hash">SHA-256 6cea6e24bc0e…</div><div class="tl-actions"><a class="btn" href="http://localhost:3000/api/files/SAMPLE.txt?version=2">Download</a><button type="button" class="btn primary">Restore</button></div></li><li class="tl-item"><div class="tl-head"><span class="tl-version">Version 1</span></div><div class="tl-meta">22 Oct 2026, 3:36 pm · 82 B</div><div class="tl-hash">SHA-256 7ccd6d5f7368…</div><div class="tl-actions"><a class="btn" href="http://localhost:3000/api/files/SAMPLE.txt?version=1">Download</a><button type="button" class="btn primary">Restore</button></div></li></ol>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="restoreDialog" aria-labelledby="restoreTitle">
+    <h2 id="restoreTitle">Restore this version?</h2>
+    <p id="restoreText">Version 1 of "SAMPLE.txt" will be copied into a new version 3. Nothing is deleted, so you can switch back at any time.</p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="restoreCancel">Cancel</button>
+      <button type="button" class="btn primary" id="restoreConfirm">Restore version</button>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <script src="./CloudVault_ Secure File Storage and Version Recovery 2_files/app.js.download"></script>
+
+
+</body></html>
